@@ -52,7 +52,7 @@ public class User implements Serializable {
     @NotNull
     private String gender;
 
-//    @Column(name = "balance")
-//    private BigDecimal balance;
+    @Column(name = "balance")
+    private BigDecimal balance;
 
 }

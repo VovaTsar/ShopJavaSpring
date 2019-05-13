@@ -33,6 +33,6 @@ public class Product implements Serializable {
 
     @Column(name = "price")
     @NotNull
-    private int price;
+    private BigDecimal price;
 
 }
