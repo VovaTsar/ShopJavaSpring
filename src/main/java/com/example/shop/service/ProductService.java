@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ProductService  {
     void save(Product product);
-    void edit(long id, Product newProduct);
-    void delete(long id);
-    Product findById(long id);
+    void edit(int id, Product newProduct);
+    void delete(int id);
+    Product findById(int id);
     List<Product> findAllByOrderByIdAsc();
     long count();
 }

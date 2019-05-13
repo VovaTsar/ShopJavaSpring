@@ -29,7 +29,7 @@ public class Product implements Serializable {
 
     @Column(name = "image")
     @URL
-    private String image_url;
+    private String imageUrl;
 
     @Column(name = "price")
     @NotNull

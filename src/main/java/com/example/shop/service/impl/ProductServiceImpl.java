@@ -2,46 +2,57 @@ package com.example.shop.service.impl;
 
 import com.example.shop.entity.Product;
 
+import com.example.shop.repository.ProductRepository;
 import com.example.shop.service.ProductService;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    private final ProductRepository productRepository;
+
+    @Autowired
+    public ProductServiceImpl(ProductRepository productRepository){
+        this.productRepository = productRepository;
+    }
 
 
     @Override
     public void save(Product product) {
+     productRepository.save(product);
+    }
+
+    @Override
+    public void edit(int id, Product newProduct) {
+        Product found = productRepository.getOne(id);
+        found.setName(newProduct.getName());
+        found.setImageUrl(newProduct.getImageUrl());
+        found.setDescription(newProduct.getDescription());
+        found.setPrice(newProduct.getPrice());
+        save(newProduct);
 
     }
 
     @Override
-    public void edit(long id, Product newProduct) {
-
+    public void delete(int id) {
+        productRepository.delete(findById(id));
     }
 
     @Override
-    public void delete(long id) {
-
-    }
-
-    @Override
-    public Product findById(long id) {
-        return null;
+    public Product findById(int id) {
+        return productRepository.findById(id);
     }
 
     @Override
     public List<Product> findAllByOrderByIdAsc() {
-        return null;
+        return productRepository.findAllByOrderByIdAsc();
     }
 
     @Override
     public long count() {
-        return 0;
+        return productRepository.count();
     }
 }
