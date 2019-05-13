@@ -15,7 +15,7 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @Column(name = "name")
     @NotNull
