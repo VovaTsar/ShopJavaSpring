@@ -58,6 +58,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void cartCheckout() {
-        cart.clear();
+
     }
 }

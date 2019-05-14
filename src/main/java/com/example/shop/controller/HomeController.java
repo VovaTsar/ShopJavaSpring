@@ -25,10 +25,6 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/about")
-    public String about(){
-        return "about";
-    }
 
     private List<Product> getAllProducts(){
         return productService.findAllByOrderByIdAsc();

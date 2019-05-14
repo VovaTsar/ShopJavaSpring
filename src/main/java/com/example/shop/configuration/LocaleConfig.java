@@ -13,12 +13,12 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public class LocaleConfig implements WebMvcConfigurer {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-
+//мовний код наразі використовується
     @Bean
     public LocaleResolver localeResolver(){
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
@@ -26,7 +26,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         return sessionLocaleResolver;
     }
-
+    //перехоплювач, який буде перемикатися на нову локаль
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
@@ -34,7 +34,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         return localeChangeInterceptor;
     }
-
+//звідки
     @Bean
     public MessageSource messageSource(){
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();

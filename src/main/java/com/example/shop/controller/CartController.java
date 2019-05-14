@@ -57,10 +57,10 @@ public class CartController {
         return "redirect:/cart";
     }
 
-    @GetMapping("/cart/checkout")
+    @GetMapping("/cart/final")
     public String cartCheckout(){
-        shoppingCartService.cartCheckout();
+       // shoppingCartService.cartCheckout();
 
-        return "redirect:/cart";
+        return "redirect:/final";
     }
 }
