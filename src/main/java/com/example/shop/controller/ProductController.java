@@ -24,12 +24,14 @@ public class ProductController {
         this.productService = productService;
         this.productValidator = productValidator;
     }
+    // страницу
     @GetMapping("/product/new")
     public String newProduct(Model model){
         model.addAttribute("productForm",new Product());
         model.addAttribute("method", "new");
         return "product";
     }
+    //данны правильні
     @PostMapping("/product/new")
     public String newProduct(@ModelAttribute("productForm") Product productForm, BindingResult bindingResult, Model model) {
         productValidator.validate(productForm, bindingResult);
@@ -44,7 +46,7 @@ public class ProductController {
 
         return "redirect:/home";
     }
-
+//get
     @GetMapping("/product/edit/{id}")
     public String editProduct(@PathVariable("id") int productId, Model model){
         Product product = productService.findById(productId);
@@ -56,7 +58,7 @@ public class ProductController {
             return "error/404";
         }
     }
-
+// send
     @PostMapping("/product/edit/{id}")
     public String editProduct(@PathVariable("id") int productId, @ModelAttribute("productForm") Product productForm, BindingResult bindingResult, Model model){
         productValidator.validate(productForm, bindingResult);

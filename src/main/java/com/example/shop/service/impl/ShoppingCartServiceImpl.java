@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Service
+//один экземпляр бина на каждую HTTP сессию
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService {

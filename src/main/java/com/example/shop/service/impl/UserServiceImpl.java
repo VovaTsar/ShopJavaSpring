@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
         authenticationManager.authenticate(token);
         System.out.println("token"+token);
         if (token.isAuthenticated()) {
+            //контекст де збериг користувачы аунтетификовани
             SecurityContextHolder.getContext().setAuthentication(token);
             logger.debug(String.format("User %s logged in successfully!", username));
         }else{
