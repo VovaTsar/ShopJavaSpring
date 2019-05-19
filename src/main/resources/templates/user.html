@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:spring="http://java.sun.com/xml/ns/javaee" xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <head th:replace="fragments/header :: header-css">
 </head>
@@ -18,8 +18,38 @@
         <h3 th:text="#{user.city} + ': ' + ${user.getCity()}"></h3>
         <h3 th:text="#{user.gender} + ': ' + ${user.getGender()}"></h3>
     </div>
+    <table>
+        <thead>
+        <tr>
+            <th> Id </th>
+            <th> First Name </th>
+            <th> Last Name </th>
+            <th> Username </th>
+            <th> City </th>
+            <th> Price </th>
+            <th> Status </th>
+            <th> Order </th>
 
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${orders==null}">
+            <td colspan="2"> No Orders Available </td>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <td><span th:text="${order.getId()}"> Id </span></td>
+            <td><span th:text="${order.getUser().getFirstName()}"> First Name </span></td>
+            <td><span th:text="${order.getUser().getLastName()}"> Last Name </span></td>
+            <td><span th:text="${order.getUser().getUsername()}"> Username </span></td>
+            <td><span th:text="${order.getUser().getCity()}"> City </span></td>
+            <td><span th:text="${order.getPriceOrd()}"> Price </span></td>
+            <td><span th:text="${order.getStatus()}"> Status </span></td>
 
+          <td th:each="product : ${order.getProducts()}">
+            <span th:text="${product.getName()  }"> Order </span></td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 
 </html>

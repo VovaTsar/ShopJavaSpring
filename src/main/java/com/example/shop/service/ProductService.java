@@ -13,5 +13,7 @@ public interface ProductService  {
     Product findById(int id);
     List<Product> findAllByOrderByIdAsc();
     long count();
+
+
 }
 

@@ -30,7 +30,7 @@ public class RegisterController {
 
         return "register";
     }
-    @PreAuthorize("Admin")
+    //@PreAuthorize("Admin")
     @PostMapping("/register")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
         userValidator.validate(userForm, bindingResult);

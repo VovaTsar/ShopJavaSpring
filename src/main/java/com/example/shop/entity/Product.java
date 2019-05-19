@@ -8,9 +8,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Data
+@Table(name = "product")
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,12 +29,15 @@ public class Product implements Serializable {
     @NotEmpty
     private String description;
 
+    @ManyToMany(mappedBy = "products")
+    private List<Orders> ordersLists ;
+
     @Column(name = "image")
     @URL
     private String imageUrl;
 
     @Column(name = "price")
     @NotNull
-    private BigDecimal price;
+    private int price;
 
 }

@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Data
+@Table(name = "user")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
