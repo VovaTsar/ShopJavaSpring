@@ -16,13 +16,11 @@ import java.util.List;
 @Controller
 public class UserController {
     private final UserService userService;
-    private final OrderRepository orderRepository;
     private final ShoppingCartService shoppingCartService;
 
     @Autowired
-    public UserController(UserService userService, OrderRepository orderRepository, ShoppingCartService shoppingCartService) {
+    public UserController(UserService userService, ShoppingCartService shoppingCartService) {
         this.userService = userService;
-        this.orderRepository = orderRepository;
         this.shoppingCartService = shoppingCartService;
     }
 
@@ -40,4 +38,6 @@ public class UserController {
 
         return "user";
     }
+
+
 }

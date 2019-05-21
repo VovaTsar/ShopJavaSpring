@@ -72,9 +72,9 @@ public class CartController {
     }
 
     @GetMapping("/cart/final")
-    public String cartCheckout() {
-
-
+    public String cartCheckout(Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+      shoppingCartService.cartCheckout(user.getId());
         return "/final";
     }
 }

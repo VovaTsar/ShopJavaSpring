@@ -1,28 +1,32 @@
 package com.example.shop.service.impl;
 
+import com.example.shop.entity.Orders;
 import com.example.shop.entity.Product;
 
+import com.example.shop.repository.OrderRepository;
 import com.example.shop.repository.ProductRepository;
 import com.example.shop.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository){
+    public ProductServiceImpl(ProductRepository productRepository, OrderRepository orderRepository) {
         this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
     }
-
 
     @Override
     public void save(Product product) {
-     productRepository.save(product);
+        productRepository.save(product);
     }
 
     @Override
@@ -38,7 +42,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delete(int id) {
-        productRepository.delete(findById(id));
+        Product product = findById(id);
+        product.setDeleted(true);
+        productRepository.save(product);
     }
 
     @Override

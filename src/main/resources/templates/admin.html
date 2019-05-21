@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:spring="http://java.sun.com/xml/ns/javaee" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<head th:replace="fragments/header :: header-css">
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h2 th:text="#{admin.title}"></h2>
+</div>
+<table>
+    <thead>
+    <tr>
+
+        <th> Id </th>
+        <th> First Name </th>
+        <th> Last Name </th>
+        <th> Email </th>
+        <th> Price </th>
+        <th> Status </th>
+        <th> Change Status </th>
+        <th> Order </th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${orders==null}">
+        <td colspan="2"> No Orders Available </td>
+    </tr>
+    <tr th:each="order : ${orders}">
+
+        <td><span th:text="${order.getId()}"> Id </span></td>
+        <td><span th:text="${order.getUser().getFirstName()}"> First Name </span></td>
+        <td><span th:text="${order.getUser().getLastName()}"> Last Name </span></td>
+        <td><span th:text="${order.getUser().getEmail()}"> Email </span></td>
+        <td><span th:text="${order.getPriceOrd()}"> Price </span></td>
+        <td><span th:text="${order.getStatus()}"> Status </span></td>
+        <td>
+        <a th:href="@{'/admin/status/{id}'(id=${order.getId()})}" >
+            <button type="button" class="btn btn-primary" th:text="#{edit.status}"></button>
+        </a>
+        </td>
+
+        <td th:each="product : ${order.getProducts()}">
+            <span th:text="${product.getName()  }"> Order </span></td>
+
+    </tr>
+
+
+    </tbody>
+</table>
+</body>
+
+</html>

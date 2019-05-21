@@ -26,10 +26,11 @@ import java.util.Map;
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-    private Map<Product, Integer> cart = new LinkedHashMap<>();
+
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
-    private  static final  String STATUS ="Ne vukonano";
+    private static final String USER_STATUS = "Wait for confirmation by the buyer";
+    private static final String ADMIN_STATUS = "Waiting for confirmation from the seller";
 
     @Autowired
     public ShoppingCartServiceImpl(OrderRepository orderRepository, ProductRepository productRepository) {
@@ -38,20 +39,19 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
 
-
     @Override
     public void addProduct(Product product, User user) {
-        Orders orders=orderRepository.findByUserIdAndStatus(user.getId(),STATUS).orElse(null);
-        if(orders==null){
-            orders=create(user);
+        Orders orders = orderRepository.findByUserIdAndStatus(user.getId(), USER_STATUS).orElse(null);
+        if (orders == null) {
+            orders = create(user);
         }
-            orders.getProducts().add(product);
-            orderRepository.save(orders);
+        orders.getProducts().add(product);
+        orderRepository.save(orders);
     }
 
     @Override
-    public void removeProduct(Product product,int userId) {
-        Orders orders = orderRepository.findByUserIdAndStatus(userId, STATUS).orElse(null);
+    public void removeProduct(Product product, int userId) {
+        Orders orders = orderRepository.findByUserIdAndStatus(userId, USER_STATUS).orElse(null);
         if (orders != null) {
             orders.getProducts().remove(product);
             orderRepository.save(orders);
@@ -60,7 +60,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void clearProducts(int userId) {
-        Orders orders = orderRepository.findByUserIdAndStatus(userId, STATUS).orElse(null);
+        Orders orders = orderRepository.findByUserIdAndStatus(userId, USER_STATUS).orElse(null);
         if (orders != null) {
             orders.getProducts().clear();
             orderRepository.save(orders);
@@ -70,7 +70,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public int totalPrice(int userId) {
         int totalPrice = 0;
-        Orders orders = orderRepository.findByUserIdAndStatus(userId, STATUS).orElse(null);
+        Orders orders = orderRepository.findByUserIdAndStatus(userId, USER_STATUS).orElse(null);
         if (orders != null) {
             for (Product product : orders.getProducts()) {
 
@@ -79,25 +79,25 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             orders.setPriceOrd(totalPrice);
             orderRepository.save(orders);
         }
-            return totalPrice;
-        }
-
-    @Override
-    public Orders create(User user) {
-        Orders orders=new Orders();
-        orders.setUser(user);
-        orders.setPriceOrd(0);
-        orders.setStatus(STATUS);
-       return orderRepository.save(orders);
+        return totalPrice;
     }
 
     @Override
-    public Orders getOrders( User user) {
-        Orders orders=orderRepository.findByUserIdAndStatus(user.getId(),STATUS).orElse(null);
-        if(orders==null){
-            orders=new Orders();
+    public Orders create(User user) {
+        Orders orders = new Orders();
+        orders.setUser(user);
+        orders.setPriceOrd(0);
+        orders.setStatus(USER_STATUS);
+        return orderRepository.save(orders);
+    }
+
+    @Override
+    public Orders getOrders(User user) {
+        Orders orders = orderRepository.findByUserIdAndStatus(user.getId(), USER_STATUS).orElse(null);
+        if (orders == null) {
+            orders = new Orders();
             orders.setPriceOrd(0);
-            orders.setStatus(STATUS);
+            orders.setStatus(USER_STATUS);
         }
         return orders;
     }
@@ -105,6 +105,25 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public List<Orders> findOrdersByUserId(int userId) {
         return orderRepository.findOrdersByUserId(userId);
+    }
+
+    @Override
+    public void cartCheckout(int userId) {
+        Orders orders = orderRepository.findByUserIdAndStatus(userId, USER_STATUS).orElse(null);
+        if (orders != null) {
+            orders.setStatus(ADMIN_STATUS);
+            orderRepository.save(orders);
+        }
+    }
+
+    @Override
+    public List<Orders> findAll() {
+        return orderRepository.findAll();
+    }
+
+    @Override
+    public Orders findById(int id) {
+        return orderRepository.findById(id);
     }
 
 

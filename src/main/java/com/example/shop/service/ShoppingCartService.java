@@ -24,4 +24,10 @@ public interface ShoppingCartService {
     Orders getOrders(User user);
 
     List<Orders> findOrdersByUserId(int userId);
+
+    void cartCheckout(int userId);
+
+    List<Orders> findAll();
+
+    Orders findById(int id);
 }

@@ -24,17 +24,19 @@ public class Product implements Serializable {
     @NotEmpty
     private String name;
 
-    @Column(name = "description",length = 500)
+    @Column(name = "description", length = 500)
     @NotNull
     @NotEmpty
     private String description;
 
-    @ManyToMany(mappedBy = "products")
-    private List<Orders> ordersLists ;
+    @ManyToMany(cascade = CascadeType.REMOVE, mappedBy = "products")
+    private List<Orders> ordersLists;
 
     @Column(name = "image")
-    @URL
     private String imageUrl;
+
+    @Column(name = "deleted")
+    private boolean deleted;
 
     @Column(name = "price")
     @NotNull

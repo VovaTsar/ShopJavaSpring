@@ -19,7 +19,7 @@ public class Orders implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "order_product",
             joinColumns = @JoinColumn(name = "orders_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))

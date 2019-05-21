@@ -26,7 +26,7 @@ public class AddInfo implements CommandLineRunner {
     public void run(String... args) {
 //        adminAccount();
 //        userAccount();
-//        exampleProducts();
+   //    exampleProducts();
     }
 
     private void userAccount(){
@@ -54,39 +54,39 @@ public class AddInfo implements CommandLineRunner {
     }
 
     private void exampleProducts(){
-        final String NAME = "Example Name";
-        final String IMAGE_URL = "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX7389458.jpg";
-        final String DESCRIPTION = "Example Description";
-        final int PRICE = 22;
-
-        Product product1 = new Product();
-        Product product2 = new Product();
-        Product product3 = new Product();
-        Product product4 = new Product();
-
-        product1.setName(NAME);
-        product1.setImageUrl(IMAGE_URL);
-        product1.setDescription(DESCRIPTION);
-        product1.setPrice(PRICE);
-
-        product2.setName(NAME);
-        product2.setImageUrl(IMAGE_URL);
-        product2.setDescription(DESCRIPTION);
-        product2.setPrice(PRICE);
-
-        product3.setName(NAME);
-        product3.setImageUrl(IMAGE_URL);
-        product3.setDescription(DESCRIPTION);
-        product3.setPrice(PRICE);
-
-        product4.setName(NAME);
-        product4.setImageUrl(IMAGE_URL);
-        product4.setDescription(DESCRIPTION);
-        product4.setPrice(PRICE);
-
-        productService.save(product1);
-        productService.save(product2);
-        productService.save(product3);
-        productService.save(product4);
+//        final String NAME = "Example Name";
+//        final String IMAGE_URL = "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX7389458.jpg";
+//        final String DESCRIPTION = "Example Description";
+//        final int PRICE = 22;
+//
+//        Product product1 = new Product();
+//        Product product2 = new Product();
+//        Product product3 = new Product();
+//        Product product4 = new Product();
+//
+//        product1.setName(NAME);
+//        product1.setImageUrl(IMAGE_URL);
+//        product1.setDescription(DESCRIPTION);
+//        product1.setPrice(PRICE);
+//
+//        product2.setName(NAME);
+//        product2.setImageUrl(IMAGE_URL);
+//        product2.setDescription(DESCRIPTION);
+//        product2.setPrice(PRICE);
+//
+//        product3.setName(NAME);
+//        product3.setImageUrl(IMAGE_URL);
+//        product3.setDescription(DESCRIPTION);
+//        product3.setPrice(PRICE);
+//
+//        product4.setName(NAME);
+//        product4.setImageUrl(IMAGE_URL);
+//        product4.setDescription(DESCRIPTION);
+//        product4.setPrice(PRICE);
+//
+//        productService.save(product1);
+//        productService.save(product2);
+//        productService.save(product3);
+//        productService.save(product4);
     }
 }
