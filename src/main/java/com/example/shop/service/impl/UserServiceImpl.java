@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationManager authenticationManager;
     private static final String FINAL_STATUS = "ORDER IS CONSIDERED";
-    private static final String USER_STATUS = "Wait for confirmation by the buyer";
     private static final String ADMIN_STATUS = "Waiting for confirmation from the seller";
     @Autowired
     public UserServiceImpl(UserRepository userRepository, OrderRepository orderRepository, UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder, AuthenticationManager authenticationManager) {

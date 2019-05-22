@@ -15,7 +15,6 @@
     <thead>
     <tr>
 
-        <th> Id </th>
         <th> First Name </th>
         <th> Last Name </th>
         <th> Email </th>
@@ -32,7 +31,6 @@
     </tr>
     <tr th:each="order : ${orders}">
 
-        <td><span th:text="${order.getId()}"> Id </span></td>
         <td><span th:text="${order.getUser().getFirstName()}"> First Name </span></td>
         <td><span th:text="${order.getUser().getLastName()}"> Last Name </span></td>
         <td><span th:text="${order.getUser().getEmail()}"> Email </span></td>

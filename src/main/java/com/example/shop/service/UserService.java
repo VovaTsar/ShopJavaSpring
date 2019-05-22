@@ -19,6 +19,7 @@ public interface UserService {
     User findById(int id);
 
     void editStatus(Orders orders, int userId);
+
     List<Orders> listBuyers();
 
 }
